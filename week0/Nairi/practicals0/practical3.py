@@ -7,16 +7,13 @@ def practical3(arr):
             num.append( x%10 )
             x //= 10
         nums.append(num)
-    results = []
-    for elem in nums:
+    for elem in range(len(nums)):
         cnt = 0
-        for digit in elem :
-            if elem.count(digit) > 1 :
+        for digit in nums[elem] :
+            if nums[elem].count(digit) > 1 :
                 cnt += 1
         if cnt < 1 :
-            results.append(elem)
-    if len(results) > 0 :
-        return results
+            return arr[elem]
     else :
         return -1
 
