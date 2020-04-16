@@ -1,19 +1,14 @@
 #practical7
-def practical7(list1, list2): 
-    # doubling list 
-    tempList = list1 * 2
-    for x in range(0, len(list1)): 
-        cnt = 0 
-          
-        for j in range(x, x + len(list1)): 
-            if list2[cnt]== tempList[j]: 
-                cnt += 1
-            else: 
-                break
-        if cnt == len(list1): 
-            return True 
+def practical7(arr1, arr2):
+    if len(arr1) != len(arr2):
+        return False
 
-    return False
+    str1 = ' '.join(map(str, arr1))
+    str2 = ' '.join(map(str, arr2))
+    if len(str1) != len(str2):
+        return False
+
+    return str1 in str2 + ' ' + str2
 
 
 if __name__ == "__main__" :
