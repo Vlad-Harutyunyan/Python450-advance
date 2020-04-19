@@ -21,9 +21,9 @@ def mirror_string(txt:str) -> str:
         mirr = str.maketrans(alphabetLower, alphabetLower[::-1], ' ')
         r = t.translate(mirr)
         r = r.swapcase()
-        res += r + ' '
+        res += " " + r
 
-    return res
+    return res[1::]
 
 
 #problem 4
