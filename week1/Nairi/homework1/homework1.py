@@ -1,30 +1,25 @@
 #problem 1
 def all_positive(*args:list) -> bool:
-    return any(x < 0 for x in args ) 
-
+    if len(args) > 0 :
+        return any(x < 0 for x in args ) 
+    else :
+        return 'You call function wihout putting arguments . '
 
 #problem 2
 def xor3(a:int,b:int,c:int) -> bool:
     return  bool(a ^ b ^ c) 
 
-
 #problem 3
-def mirror_string(txt:str) -> str:
-    #alphabet with lower and upper cases 
-    alphabetLower = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+def mirror_string(stri:str) -> str:
     res = ''
-    #slice words for white spaces
-    tmp = txt.split(' ')
-
-    for t in tmp :
-        r = ''
-        mirr = str.maketrans(alphabetLower, alphabetLower[::-1], ' ')
-        r = t.translate(mirr)
-        r = r.swapcase()
-        res += " " + r
-
-    return res[1::]
-
+    for x in range(len(stri)):
+        if stri[x].isalpha() and stri[x].islower() :
+            res += chr(97 + (25-(ord(stri[x])-97)))
+        elif stri[x].isalpha() and stri[x].isupper():
+            res += chr(65 + (25-(ord(stri[x])-65)))
+        else :
+            res += stri[x]
+    return res
 
 #problem 4
 def bit_concat (arr:list) -> int:
@@ -55,12 +50,13 @@ discriminant = lambda a,b,c: b**2 - 4 * (a*c)
 full_name = (lambda i,j :   i+ " " +j )
 
 
+
 if __name__  == '__main__' :
     print('problem 1) -----------  All positive function tests -----------')
     print(all_positive(-1,2,3,4,1))
     print(all_positive(2,3,4,1))
     print(all_positive(7,2,6,-3,10))
-
+    print(all_positive()) 
     print('problem 2) -----------  Logical xor for 3 arguments -----------')
     print(xor3(1,0,0))
     print(xor3(0,0,0))
