@@ -37,7 +37,7 @@ def binary_sum(num1:str,num2:str) -> int:
 
 
 #problem 6
-def only_names(x:list) -> bool :
+def only_names(x:str) -> bool :
     if len(x) != 0 :
         return x
 
@@ -91,3 +91,8 @@ if __name__  == '__main__' :
     p8_1 = ['Nairi','Vlad']
     p8_2 = ['Hakobyan','Poghosyan']
     print(list(map(full_name,p8_1,p8_2)))
+    a = [1,2,3]
+    b = a
+    b.append(4)
+    print(b)
+    print(a)
