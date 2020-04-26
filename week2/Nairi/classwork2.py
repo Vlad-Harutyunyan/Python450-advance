@@ -42,4 +42,4 @@ def heapsort(arr):
     return [heappop(h) for i in range(len(h))]
 
 
-heapsort([1,2,4,2,1,3,5,10,2,6,345,3,89,41])
+heapsort([1,3,5,7,9,2])
