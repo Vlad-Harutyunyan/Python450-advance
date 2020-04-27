@@ -1,19 +1,26 @@
 import socket
 from configparser import ConfigParser
+import os
 
+
+#dirname
+thisfolder = os.path.dirname(os.path.abspath(__file__))
+initfile = os.path.join(thisfolder, 'config.ini')
 config = ConfigParser()
-config.read('config.ini')
-IP = config['inet']['ip']
-PORT = config.getint('inet','port')
- 
-with  socket.socket(socket.AF_INET,socket.SOCK_STREAM) as sock: #AF_INET = ipv4 SOCK_STREAM = TCP PROTOCOL
-    sock.bind((IP,PORT)) # '' = any possible
-    sock.listen(1)
-  
-    conn , addr = sock.accept()
-   
-    print('Connected by ' , addr)
+#read
+config.read(initfile)
+#init sections
+IP = config.get('socket','ip')
+PORT = config.getint('socket','port')
 
+
+with  socket.socket(socket.AF_INET,socket.SOCK_STREAM) as sock: #AF_INET = ipv4 SOCK_STREAM = TCP PROTOCOL
+    
+    sock.bind(('',PORT)) # '' = any possible
+    sock.listen(1)
+    conn , addr = sock.accept()
+    
+    print('Connected by ' , addr)
     with conn:
         while True :
             SIZE = 1024 # in bytes
@@ -21,11 +28,7 @@ with  socket.socket(socket.AF_INET,socket.SOCK_STREAM) as sock: #AF_INET = ipv4 
             
             if data == b'exit':
                 break
-            
-            if data == 'test':
-                print('work dude')
+            if data == b'test':
+                print('work for server')
             conn.sendall(data)
 
-# conn.shutdown(socket.SHUT_RDWR)
-# conn.close()
-# if we use with context manager close auto 

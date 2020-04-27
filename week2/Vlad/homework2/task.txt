@@ -1,0 +1,23 @@
+1)Simple Command Server
+
+Create a client-server application for retrieving date and time from server using sockets. The client must establish a connection with the server and after that must prompt a user for command input. Client must send that command to the server, which will send the execution result back. If the server doesn't recognize a command, it must send an error message and keep the connection opened. The client must also provide an exit command for terminating the connection and closing both client and server applications.
+The response from server must be shown to the user in a string format.
+
+Supported commands (example):
+
+>>> day
+25
+>>> month
+04
+>>> year
+2020
+>>> time
+15:16
+>>> someting
+Unrecognized command 'something'
+>>> exit
+
+
+2)INI parser
+
+Implement a parse_ini function, which must take an INI file path as an argument and return a dict object containing parsed data. The parser must raise an exception if provided configuration file contains invalid INI formatted data. If a value of any key can be represented by an integer, it must be castted to an integer. Rather than that every value must be of string type.
