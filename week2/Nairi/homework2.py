@@ -1,9 +1,7 @@
 #imports
-from itertools import combinations
 from collections import defaultdict
 
 #problem1
-
 def bisect_position(arr:list,n:int) -> int :
     for x in arr:
         if n >= x :
@@ -14,9 +12,17 @@ def bisect_position(arr:list,n:int) -> int :
       
 #problem2
 
-def all_sums(numm:int) -> tuple :
-    pairs = list(range(1,numm))
-    return [pair for pair in combinations(pairs,2) if sum(pair) == numm]
+def all_sums(numm:int) -> list :
+    cnt = numm//2
+    left = list(range(1,cnt+1))
+    right = list(range(cnt,numm))
+    r = []
+    
+    for x in left :
+        for y in right :
+            if x + y == numm :
+                r.append((x,y))
+    return r   
 
 #problem3
 
@@ -32,7 +38,7 @@ def duplicate_characters(stri:str) -> dict :
 
 #problem4
 
-def compare_list(arr1:list,arr2:list) -> bool :
+def compare_lists(arr1:list,arr2:list) -> bool :
     if len(arr1) != len(arr2) :
         return False
     else :
@@ -108,7 +114,7 @@ if __name__ == "__main__" :
     print(all_sums(4))
     print(all_sums(2))
     print(all_sums(77))
-    print(all_sums(1))
+    print(all_sums(10))
 
     print('3)--------- defaultdict (duplications)   ')
     print(duplicate_characters('hellllllo world'))
@@ -116,15 +122,15 @@ if __name__ == "__main__" :
     print(duplicate_characters('no duplicates'))
 
     print('4)---- compare list -----')
-    print(compare_list([1,2,3],[3,2,1,1]))
-    print(compare_list([1,2,4,3],[3,2,1,4]))
-    print(compare_list([1,2,1,3],[3,2,1,4]))
-    print(compare_list([1,1,1,4],[3,2,1,4]))
-    print(compare_list([1,2,3,4],[1,2,3,4]))
-    print(compare_list([-1,-2,3,4],[3,4,-1,-2]))
-    print(compare_list([-1,-2,3,4,-1,-2,1],[-1,-2,3,4,-1,-2,1]))
-    print(compare_list([1,2,1,2,1,2],[1,2,1,2,1,2]))
-    print(compare_list([1,2,1,1,1,2],[1,2,1,2,1,2]))
+    print(compare_lists([1,2,3],[3,2,1,1]))
+    print(compare_lists([1,2,4,3],[3,2,1,4]))
+    print(compare_lists([1,2,1,3],[3,2,1,4]))
+    print(compare_lists([1,1,1,4],[3,2,1,4]))
+    print(compare_lists([1,2,3,4],[1,2,3,4]))
+    print(compare_lists([-1,-2,3,4],[3,4,-1,-2]))
+    print(compare_lists([-1,-2,3,4,-1,-2,1],[-1,-2,3,4,-1,-2,1]))
+    print(compare_lists([1,2,1,2,1,2],[1,2,1,2,1,2]))
+    print(compare_lists([1,2,1,1,1,2],[1,2,1,2,1,2]))
 
     print('5)----------- heapq ----------------')
     print(heapq([1,3,5,7,9],2))
