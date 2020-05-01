@@ -36,7 +36,7 @@ def duplicate_characters(stri:str) -> dict :
    
     return res
 
-#problem4
+#problem4        
 
 def compare_lists(arr1:list,arr2:list) -> bool :
     if len(arr1) != len(arr2) :
@@ -62,6 +62,7 @@ def heappush(heap, val):
         le = parent
         pass
     pass
+
 
 def heapq(arr:list,n:int) -> list:
     h = []

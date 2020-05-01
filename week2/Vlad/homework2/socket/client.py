@@ -1,7 +1,6 @@
 import socket
 from configparser import ConfigParser
 import os
-import datetime
 
 #dirname
 thisfolder = os.path.dirname(os.path.abspath(__file__))
@@ -14,29 +13,22 @@ IP = config.get('socket','ip')
 PORT = config.getint('socket','port')
 
 client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
-client.connect(('',PORT))
-d = datetime.datetime.now()
+client.connect((IP,PORT))
 
 print('Welcome :) , print help for commands !')
 
 while True:
     user_input = input('command : ')
-    client.sendall(user_input.encode())
-    data = client.recv(1024)
     
     if user_input == 'exit':
+        client.sendall(user_input.encode())
         break
-    elif user_input == 'help':
-        print('commands ` \n 1) day - return current day \n 2) month - return current month \n 3) time - return  current time format hour:minute  \n 4) year - return current year \n 5) exit - close program')
-    elif user_input == 'day':
-        print(d.day)
-    elif user_input == 'month':
-        print(d.month)
-    elif user_input == 'time':
-        print(f'{d.hour}:{d.minute}')
-    elif user_input == 'year':
-        print(d.year)
+    elif not len(user_input):
+        print('empty')
     else :
-        print(f'Unrecognized command \'{user_input}\' :(')
+        client.sendall(user_input.encode())
+        data = client.recv(1024)
+        print(data.decode("utf-8")) 
+
 client.shutdown(socket.SHUT_RDWR)
 client.close()
