@@ -25,7 +25,8 @@ def ini_parser(path:str) -> dict :
                 if '=' in lines[el] :
                     lines[el] = lines[el].split('=')
                     lines[el][0] = lines[el][0].strip()
-                    lines[el][1] = lines[el][1].strip()
+                    if not lines[el][1].count('\'') or not lines[el][1].count('\"'):
+                        lines[el][1] = lines[el][1].strip()
                 else:
                     print('wrong format')
                     return
