@@ -32,10 +32,12 @@ def ini_parser(path:str) -> dict :
                 if lines[el][1].isdecimal()  and lines[el][1][0] != '0':
                     lines[el][1] = int(lines[el][1])
         t.append(len(lines))
-        c = {lines[t[x]]:lines[t[x]+1:t[x+1]] for x in range(len(t)-1) }
+        c = {lines[t[x]]:dict(lines[t[x]+1:t[x+1]]) for x in range(len(t)-1) }
         return c
     
 if __name__ == "__main__":
     thisfolder = os.path.dirname(os.path.abspath(__file__))
     initfile = os.path.join(thisfolder, 'test.ini')
-    print(ini_parser(initfile))
+    test = ini_parser(initfile)
+    print(test)
+    print(test['test1']['t'])
