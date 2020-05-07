@@ -7,9 +7,7 @@ def arr_replace(arr:list) -> list:
 
 def arr_replace_where(arr:list) -> list :
     res = np.array(arr)
-    res1 = res.copy()
-    res1[res1%2==0] = 0
-    return res1
+    return np.where(res%2==0, 0 , res)
 
 
 def arr_repeat(arr:list) -> list :
@@ -20,7 +18,7 @@ def arr_repeat(arr:list) -> list :
 def arr_join(arr:list) -> list :
     res = np.array(arr)
     return np.tile(res,3)
-
+    
 def arr_intersection(arr1:list,arr2:list) -> list :
     return np.intersect1d(arr1,arr2)
 
