@@ -49,22 +49,28 @@ print(directors)
 ########problem4###########
 ###########################
 df4 = pd.read_csv(initfile)
-def split_cast(df, column, sep=',', keep=False):
-    indexes = list()
-    new_values = list()
-    df = df.dropna(subset=[column])
-    for i, presplit in enumerate(df[column].astype(str)):
-        values = presplit.split(sep)
-        if keep and len(values) > 1:
-            indexes.append(i)
-            new_values.append(presplit)
-        for value in values:
-            indexes.append(i)
-            new_values.append(value)
-    new_df = df.iloc[indexes, :].copy()
-    new_df[column] = new_values
-    return new_df  
-newdf4 = split_cast(df4,'cast')
+#hardcoding
+# def split_cast(df, column, sep=',', keep=False):
+#     indexes = list()
+#     new_values = list()
+#     df = df.dropna(subset=[column])
+#     for i, presplit in enumerate(df[column].astype(str)):
+#         values = presplit.split(sep)
+#         if keep and len(values) > 1:
+#             indexes.append(i)
+#             new_values.append(presplit)
+#         for value in values:
+#             indexes.append(i)
+#             new_values.append(value)
+#     new_df = df.iloc[indexes, :].copy()
+#     new_df[column] = new_values
+#     return new_df  
+# newdf4 = split_cast(df4,'cast')
+
+#without hardcoding
+newdf4 = df4[df4['cast'].notna()] 
+newdf4['cast'] = newdf4.cast.str.split(',')
+newdf4 =  newdf4.explode('cast' )
 print(newdf4)
 
 
@@ -76,7 +82,9 @@ df5 = df5[df5['cast'].notna()]
 p5 = (df5['cast'].str.contains('Antonio Banderas')) 
 df5['duration'] = df5['duration'].apply(lambda x: int(x.split(' ')[0]))
 res = df5[p5].sort_values(by='duration')
-print(res)
+
+df5.plot(x ='title', y='duration', kind = 'line')
+plt.show() 
 
 ###########################
 ########problem6###########
@@ -89,6 +97,7 @@ times = df6['date_added']
 cnt = 0 
 startyear = 2008
 infodata = {}
+
 for x in times:
     if int(str(x).replace("00:00:00",'').split('-')[0]) == startyear:
         cnt+=1
@@ -111,14 +120,14 @@ df7['date_added'] = pd.to_datetime(df7['date_added'])
 # 
 # df7.sort_values('date_added',inplace=True)
 df7 = df7[df7['date_added'].notna()]
-df7['date_added'] = df7['date_added'].apply(lambda x:str(x).split(':')[0].split(' ')[0])
-df7.reset_index(inplace=True)
-df7['range'] = 0
-
-for x in range(2,len(df7)):
-        day1 = d.strptime(df7.date_added[x],"%Y-%m-%d")
-        day2 = d.strptime(df7.date_added[x-1],"%Y-%m-%d")
-        df7.at[x,'range'] = abs((day1-day2))
+def date_diff(row):
+    index = df7.index.get_loc(row.name)
+    if index == 0:
+        return np.nan
+    prev_row = df7.iloc[index - 1]
+    return row['date_added'] - prev_row['date_added']
+    
+df7['difference'] = df7.apply(date_diff, axis=1)
 print(df7)
 
 ###########################
@@ -128,13 +137,16 @@ df8 = pd.read_csv(initfile)
 df8['date_added'] = pd.to_datetime(df8['date_added'])
 df8 = df8[df8['date_added'].notna()]
 directors = df8[df8['director'].notna()]
-t = directors.sort_values(by='director')
-t['range'] = 0
-t['date_added'] = t['date_added'].apply(lambda x:str(x).split(':')[0].split(' ')[0])
-t.reset_index(inplace=True)
+df8 = directors.sort_values(by='director')
 
-for x in range(2,len(t)):
-        day1 = d.strptime(t.date_added[x],"%Y-%m-%d")
-        day2 = d.strptime(t.date_added[x-1],"%Y-%m-%d")
-        t.at[x,'range'] = abs((day1-day2))
-print(t)
+
+def date_diff8(row):
+    index = df8.index.get_loc(row.name)
+    if index == 0:
+        return np.nan 
+    prev_row = df8.iloc[index - 1]
+    return row['date_added'] - prev_row['date_added']
+
+
+df8['difference'] = df8.apply(date_diff8, axis=1)
+print(df8['difference'])
