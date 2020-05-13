@@ -21,10 +21,8 @@ row =  [x for x in range(len(data))]
 for x in data:
     x.append(rd.randint(4214124,9898988) )
 df1 = pd.DataFrame(data = data , columns=col,index = row)
-print(df1)
 df1 = df1.set_index('id_card')
 print(df1)
-
 
 ###########################
 ########problem2###########
@@ -35,20 +33,19 @@ df2 = pd.read_csv(initfile)
 problem2 = (df2['release_year'] > 2014) & (df2['cast'].str.contains('Kevin Spacey') | (df2['cast'].str.contains('Leonardo DiCaprio')) )
 print(df2[problem2])
 
-
-
 ###########################
 ########problem3###########
 ###########################
 df3 = pd.read_csv(initfile)
-directors = df3[df3['director'].notna()]
-directors['count'] = directors.groupby(by='director')['director'].transform('count')
-print(directors)
+df3 = df3[df3['director'].notna()]
+df3['count'] = df3.groupby(by='director')['director'].transform('count')
+print(df3)
 
 ###########################
 ########problem4###########
 ###########################
 df4 = pd.read_csv(initfile)
+
 #hardcoding
 # def split_cast(df, column, sep=',', keep=False):
 #     indexes = list()
@@ -68,10 +65,10 @@ df4 = pd.read_csv(initfile)
 # newdf4 = split_cast(df4,'cast')
 
 #without hardcoding
-newdf4 = df4[df4['cast'].notna()] 
-newdf4['cast'] = newdf4.cast.str.split(',')
-newdf4 =  newdf4.explode('cast' )
-print(newdf4)
+df4 = df4[df4['cast'].notna()] 
+df4['cast'] = df4.cast.str.split(',')
+df4 =  df4.explode('cast' )
+print(df4)
 
 
 ###########################
@@ -94,22 +91,24 @@ df6['date_added'] = pd.to_datetime(df6['date_added'])
 df6 = df6[df6['date_added'].notna()]
 df6.sort_values('date_added',inplace=True)
 times = df6['date_added']
-cnt = 0 
-startyear = 2008
-infodata = {}
+times.hist(bins = 42)
+plt.show() 
 
-for x in times:
-    if int(str(x).replace("00:00:00",'').split('-')[0]) == startyear:
-        cnt+=1
-        infodata[startyear] = cnt
-    else :
-        startyear += 1
-        cnt = 0
-
-f, ax = plt.subplots(figsize=(18,12)) 
-ax.grid(zorder=0)
-plt.bar([ str(i) for i in infodata.keys()], infodata.values(), width=0.3, align='center', color='skyblue', zorder=10)
-plt.show()
+#hardcoding
+# cnt = 0 
+# startyear = 2008
+# infodata = {}
+# for x in times:
+#     if int(str(x).replace("00:00:00",'').split('-')[0]) == startyear:
+#         cnt+=1
+#         infodata[startyear] = cnt
+#     else :
+#         startyear += 1
+#         cnt = 0
+# f, ax = plt.subplots(figsize=(18,12)) 
+# ax.grid(zorder=0)
+# plt.bar([ str(i) for i in infodata.keys()], infodata.values(), width=0.3, align='center', color='skyblue', zorder=10)
+# plt.show()
 
 
 ###########################
@@ -147,6 +146,6 @@ def date_diff8(row):
     prev_row = df8.iloc[index - 1]
     return row['date_added'] - prev_row['date_added']
 
-
+    
 df8['difference'] = df8.apply(date_diff8, axis=1)
 print(df8['difference'])
