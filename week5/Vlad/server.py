@@ -2,7 +2,7 @@ import socket
 import json
 import random
 IP = '178.0.0.1'
-PORT = 8027
+PORT = 8028
 SIZE = 1024 # in bytes
 
 
@@ -52,9 +52,7 @@ with  socket.socket(socket.AF_INET,socket.SOCK_STREAM) as sock:
         while True :
             r = None
             data = (conn.recv(SIZE).decode()).split(',')
-                
             print(data)
-
             if int(data[0]) > 3 :
                 r = json.dumps('[error] row index out of range !')
             elif int(data[1]) >= 3 :

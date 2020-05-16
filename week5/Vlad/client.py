@@ -2,7 +2,7 @@ import socket
 import json
 
 IP = '127.0.0.1'
-PORT = 8027
+PORT = 8028
 SIZE = 1024 # in bytes
   
 client = socket.socket(socket.AF_INET,socket.SOCK_STREAM)
@@ -33,7 +33,7 @@ while True:
         data =  json.loads(client.recv(SIZE).decode("utf-8"))
         if '[error]' in data:
             print(data)
-        if '[win]' in data :
+        elif '[win]' in data :
             print('You won')
         elif '[lose]' in data :
             print('You lose')
