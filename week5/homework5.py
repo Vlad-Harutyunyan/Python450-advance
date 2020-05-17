@@ -87,15 +87,15 @@ class Quadrilateral(Polygon):
         super().__init__()
 
 class Rectangle(Quadrilateral) :
-    def __init__(self , length,width):
+    def __init__(self , length:int,width:int):
         super().__init__()
         self.length = length
         self.width = width
 
-    def area(self):
+    def area(self:object) -> int :
         return self.length * self.width
 
-    def perimeter(self):
+    def perimeter(self:object) -> int:
         return 2 * self.length + 2 * self.width
 
 class Square(Rectangle):
