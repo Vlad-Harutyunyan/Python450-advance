@@ -40,7 +40,7 @@ class RomanNumber:
 
 
 class Person:
-    def __init__(self,name:str,last_name:str,age:int,gender:bool,password:str):
+    def __init__(self:object,name:str,last_name:str,age:int,gender:bool,password:str):
         self.name = name
         self.last_name = last_name
         self.age = age 
@@ -58,16 +58,20 @@ class Person:
 
     def get_age(self:object) -> int :
         return self.age
+
+
     def get_status(self:object) -> bool :
         return self.student
-    def Getting(self,second_person:object) -> str:
+
+
+    def Greeting(self:object,second_person:object) -> str:
         text = f'Welcom dear {second_person.get_name()}'
-        return text
+        print(text)
 
 
-    def Goodbye(self) -> str:
+    def Goodbye(self:object) -> str:
         text = 'Bye everyone'
-        return text
+        print(text)
 
     def Favorite_num(self:object,num1:int) -> str:
         text = f'My favorite number is {num1}'
@@ -79,12 +83,23 @@ class Person:
     
 
 class Polygon:
-    def __init__ (self):
-        pass
+    def __init__(self, n_of_sides):
+        self.n = n_of_sides
+        self.sides = list()
+
+    def input_sides(self, sides):
+        self.sides = sides
+
+    def disp_sides(self):
+        for i in range(self.n):
+            print("Side",i+1,"is",self.sides[i])
+            
+    def perimeter(self):
+        return sum(self.sides)
 
 class Quadrilateral(Polygon):
     def __init__(self):
-        super().__init__()
+        super().__init__(4)
 
 class Rectangle(Quadrilateral) :
     def __init__(self , length:int,width:int):
@@ -97,10 +112,12 @@ class Rectangle(Quadrilateral) :
 
     def perimeter(self:object) -> int:
         return 2 * self.length + 2 * self.width
-
+    def input_sides(self):
+        pass
 class Square(Rectangle):
-    def __init__(self, length):
+    def __init__(self,length):
         super().__init__(length, length)
+
 
         
 
@@ -165,9 +182,9 @@ if __name__ == "__main__" :
     
     for person in person_list:
         print(f' first person name - {person.get_name()} , surname - {person.get_last_name()} , i`m {person.get_age()} years old , student status {person.get_status()}' )
-        print(person.Getting(person_list[3]))
+        person.Greeting(person_list[3])
         print(person.Favorite_num(random.randint(1,999)))
-        print(person.Goodbye())
+        person.Goodbye()
 
     print(
     """
