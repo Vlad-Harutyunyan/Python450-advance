@@ -15,8 +15,6 @@ def content_type(path:str) -> str:
     else:                                                                        
         return "text/html" 
 
-
-
 class HTTPError(Exception):
 
     def __init__(self, reason: str, code: int):
@@ -79,10 +77,10 @@ def search_in_db(search:dict)  -> list :
         #         find_elemets.append(item)
     return find_elemets
 
-def search_result_to_html(row):
+def search_result_to_html(row:dict) -> str:
     return f' <div class="card text-white bg-info mb-3 style="max-width: 18rem;"> <div class="card-header">Find Someone</div> <div class="card-body"> <h5 class="card-title">User information from database </h5> <p class="card-text">{" ".join([str(val) for key in row  for val in row[key]])} </p></div></div>'
 
-def listToString(s):  
+def listToString(s:list) -> str:  
     
     # initialize an empty string 
     str1 = " " 
@@ -151,15 +149,11 @@ ROUTING_TABLE = {
         'GET': get_feedback,
         'POST': post_feedback,
     },
-    '/feedback/send': {
-        'POST': post_feedback,
-    },
     '/search': {
         'GET': get_search,
         'POST': post_search,
     }
 }
-
 
 def app(env: dict, start_response: Callable) -> Iterable:
     # for key, val in env.items():
