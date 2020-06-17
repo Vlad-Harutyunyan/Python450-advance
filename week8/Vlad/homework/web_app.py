@@ -86,7 +86,7 @@ def listToString(s):
     
     # initialize an empty string 
     str1 = " " 
-    
+    print(s)
     # return string   
     return (str1.join(s)) 
    
@@ -114,7 +114,7 @@ def get_search(env: dict):
                             height:40px;
                         } 
                          """ + f"""
-                    </style>
+                    </style> 
                 </head>
                 <body>
                
@@ -130,7 +130,8 @@ def get_search(env: dict):
             </html>
         
          """
-        print('find something')  
+
+        # print('find something')  
         return html.encode()
     with open(Path(f'{thisfolder}/html/search.html'), 'rb') as fd:
         return fd.read()
@@ -139,9 +140,9 @@ def get_search(env: dict):
 def post_search(env: dict):
     pass
 
-
 def not_found(env: dict):
-    raise HTTPError('Not Found', 404)
+    with open(Path(f'{thisfolder}/html/404.html'), 'rb') as fd:
+        return fd.read()
 
 
 
