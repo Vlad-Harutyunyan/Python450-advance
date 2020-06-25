@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Feedback
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/feedback.css">
+
+ 
+	<section id="hire">
+		<a style="color:#313a3d; font-size:15px;" href="/search">Search someone</a>
+		<h1>Your Info</h1>
+		
+		<form method="POST">
+			  <div class="field name-box">
+					<input type="text" id="name" name="user_first_name" placeholder="First name" required/>
+					<label for="name">First name</label>
+					<span class="ss-icon">check</span>
+			  </div> 
+			  <div class="field name-box">
+				<input type="text" id="name" name="user_last_name" placeholder="Last name" required/>
+				<label for="user_last_name">Last name</label>
+				<span class="ss-icon">check</span>
+			</div> 
+			<div class="field name-box">
+				<input type="number" id="name" name="user_age" required min="1" max="120" required/>
+				<label for="user_last_name">Age</label>
+				<span class="ss-icon">check</span> 
+			</div> 
+				  <div class = "select_gender_area">
+					  <h5>Select gender</h5>
+					<input type="radio" value="female" id='female_rd_btn' name="user_gender" required>
+					<label for="female_rd_btn">Female</label>
+					<input type="radio" value="male" id='male_rd_btn' name="user_gender" required>
+					<label for="male_rd_btn">Male</label>
+				  </div>
+	
+			  <input class="button" type="submit" value="Send" />
+	  </form>
+	</section>
+
+{% endblock content %}

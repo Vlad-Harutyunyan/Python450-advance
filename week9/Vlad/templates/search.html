@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Search
+{% endblock title %}
+
+{% block content %}
+
+<link rel="stylesheet" type="text/css" href="static/css/search.css">
+
+ <div class="container">
+    <div class="alert alert-primary" role="alert">
+        Can't find a user?<a href="/" class="alert-link"> add user to the database</a>
+    </div>
+</div>
+
+    <section id="main_sect">
+        <form id="content" method="GET">
+            <input type="text" name="user_search" class="input" id="search-input">
+            <button type="reset" class="search" id="search-btn"></button>
+        </form>
+    </section>
+
+{% endblock content %}

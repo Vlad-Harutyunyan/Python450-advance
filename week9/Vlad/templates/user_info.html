@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    User Found
+{% endblock title %}
+
+{% block content %}
+<link rel="stylesheet" type="text/css" href="static/css/user_found.css">
+
+<div class="alert alert-success" role="alert">
+    Success ! : Found {{result|length}}  
+    {% if result|length > 1 %} users {% else %} user {% endif %}
+</div>
+<div class="container">
+{% for users in result %}
+    <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+        <div class="card-header">User Card</div>
+        <div class="card-body">
+        
+        {% for field,user in users.items() %}
+        
+            {% if field == 'name' %}
+            <h5 class="card-title">
+                {{field}} - {{user}}
+            </h5>
+            {% else %}
+            <div class = 'user_field'></div>
+            <p class='card-text'>{{field}} - {{user}}</p>   
+            {% endif %}
+
+        {% endfor %}
+    </div>
+</div>
+{% endfor %}
+</div>
+{% endblock content %}
